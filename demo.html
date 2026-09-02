@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="utf-8">
   <title>Redwoods — Demo</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --thumb-h: 128px;
-      --accent:  #7c6248;
-      --bg:      #0d1117;
-      --panel:   #111820;
-      --border:  rgba(255,255,255,.06);
+      --accent: #7c6248;
+      --bg: #0d1117;
+      --panel: #111820;
+      --border: rgba(255, 255, 255, .06);
     }
 
     body {
@@ -32,8 +37,8 @@
       gap: 6px;
       padding: 5px 12px;
       border-radius: 6px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .10);
       color: #7a8fa8;
       font-size: .68rem;
       letter-spacing: .04em;
@@ -42,10 +47,11 @@
       flex-shrink: 0;
       margin-top: 6px;
     }
+
     .gh-link:hover {
       color: #c5d0de;
-      background: rgba(255,255,255,.10);
-      border-color: rgba(255,255,255,.20);
+      background: rgba(255, 255, 255, .10);
+      border-color: rgba(255, 255, 255, .20);
     }
 
     /* ── Slide arrows ── */
@@ -55,17 +61,20 @@
       align-items: center;
       gap: 12px;
     }
+
     .laptop-col {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
     .slide-arrow {
       flex-shrink: 0;
-      width: 44px; height: 44px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .10);
       color: #5a7080;
       font-size: 1.6rem;
       line-height: 1;
@@ -76,10 +85,11 @@
       transition: color .15s, background .15s, border-color .15s;
       align-self: center;
     }
+
     .slide-arrow:hover {
       color: #c5d0de;
-      background: rgba(255,255,255,.13);
-      border-color: rgba(255,255,255,.20);
+      background: rgba(255, 255, 255, .13);
+      border-color: rgba(255, 255, 255, .20);
     }
 
     /* ── Viewer ── */
@@ -103,57 +113,65 @@
       align-items: center;
       gap: 7px;
       box-shadow:
-        0 0 0 1px rgba(255,255,255,.10),
-        0 0 0 2px rgba(0,0,0,.60),
-        0 8px 16px rgba(0,0,0,.40),
-        0 24px 64px rgba(0,0,0,.60),
-        0 48px 120px rgba(0,0,0,.30),
-        inset 0 1px 0 rgba(255,255,255,.08),
-        inset 0 -1px 0 rgba(0,0,0,.40);
+        0 0 0 1px rgba(255, 255, 255, .10),
+        0 0 0 2px rgba(0, 0, 0, .60),
+        0 8px 16px rgba(0, 0, 0, .40),
+        0 24px 64px rgba(0, 0, 0, .60),
+        0 48px 120px rgba(0, 0, 0, .30),
+        inset 0 1px 0 rgba(255, 255, 255, .08),
+        inset 0 -1px 0 rgba(0, 0, 0, .40);
     }
+
     .laptop-cam {
-      width: 6px; height: 6px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: #2b2f3a;
-      border: 1px solid rgba(0,0,0,.5);
-      box-shadow: inset 0 1px 2px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.03);
+      border: 1px solid rgba(0, 0, 0, .5);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .03);
       flex-shrink: 0;
     }
+
     .laptop-screen {
       border-radius: 3px;
       overflow: hidden;
-      box-shadow: 0 0 0 1px #000, inset 0 0 0 1px rgba(255,255,255,.02);
+      box-shadow: 0 0 0 1px #000, inset 0 0 0 1px rgba(255, 255, 255, .02);
       background: #000;
       line-height: 0;
     }
+
     .laptop-base {
       width: calc(100% + 24px);
       height: 20px;
       background: linear-gradient(180deg, #2a2d35 0%, #1e2025 100%);
       border-radius: 0 0 8px 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,.5);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .5);
       position: relative;
       flex-shrink: 0;
     }
+
     .laptop-base::after {
       content: '';
       position: absolute;
       bottom: 4px;
-      left: 50%; transform: translateX(-50%);
-      width: 56px; height: 7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 56px;
+      height: 7px;
       border-radius: 3px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.07);
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .07);
     }
 
     .page-wrap {
       overflow: hidden;
       flex-shrink: 0;
     }
+
     .page-wrap iframe {
       display: block;
-      width: 1200px;
-      height: 675px;
+      width: 1920px;
+      height: 1080px;
       border: none;
       transform-origin: top left;
       background: #fff;
@@ -168,6 +186,7 @@
       display: flex;
       align-items: center;
     }
+
     .strip-arrow {
       flex-shrink: 0;
       width: 36px;
@@ -183,10 +202,12 @@
       justify-content: center;
       transition: color .15s, background .15s;
     }
+
     .strip-arrow:hover {
       color: var(--accent);
-      background: rgba(124,98,72,.08);
+      background: rgba(124, 98, 72, .08);
     }
+
     .thumbstrip {
       height: var(--thumb-h);
       flex: 1;
@@ -198,9 +219,19 @@
       padding: 0 4px;
       scroll-behavior: smooth;
     }
-    .thumbstrip::-webkit-scrollbar { height: 3px; }
-    .thumbstrip::-webkit-scrollbar-track { background: transparent; }
-    .thumbstrip::-webkit-scrollbar-thumb { background: #202c3a; border-radius: 2px; }
+
+    .thumbstrip::-webkit-scrollbar {
+      height: 3px;
+    }
+
+    .thumbstrip::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .thumbstrip::-webkit-scrollbar-thumb {
+      background: #202c3a;
+      border-radius: 2px;
+    }
 
     .thumb-item {
       flex-shrink: 0;
@@ -211,11 +242,18 @@
       border: 2px solid transparent;
       transition: border-color .15s;
     }
-    .thumb-item:hover  { border-color: rgba(124,98,72,.5); }
-    .thumb-item.active { border-color: var(--accent); }
+
+    .thumb-item:hover {
+      border-color: rgba(124, 98, 72, .5);
+    }
+
+    .thumb-item.active {
+      border-color: var(--accent);
+    }
 
     .thumb-img {
-      width: 160px; height: 90px;
+      width: 160px;
+      height: 90px;
       object-fit: cover;
       display: block;
       background: #1a2230;
@@ -223,12 +261,14 @@
 
     /* 스크린샷 없을 때 placeholder — 미니 브라우저 스타일 */
     .thumb-placeholder {
-      width: 160px; height: 90px;
+      width: 160px;
+      height: 90px;
       background: linear-gradient(160deg, #1e2630 0%, #161a20 100%);
       display: flex;
       flex-direction: column;
       overflow: hidden;
     }
+
     .thumb-bar {
       background: #252b34;
       height: 14px;
@@ -238,18 +278,22 @@
       gap: 3px;
       flex-shrink: 0;
     }
+
     .thumb-dot {
-      width: 4px; height: 4px;
+      width: 4px;
+      height: 4px;
       border-radius: 50%;
-      background: rgba(255,255,255,.12);
+      background: rgba(255, 255, 255, .12);
     }
+
     .thumb-url {
       flex: 1;
       height: 6px;
       border-radius: 3px;
-      background: rgba(255,255,255,.07);
+      background: rgba(255, 255, 255, .07);
       margin-left: 3px;
     }
+
     .thumb-content {
       flex: 1;
       display: flex;
@@ -273,9 +317,13 @@
       text-overflow: ellipsis;
       text-align: center;
     }
-    .thumb-item.active .thumb-label { color: #c5d0de; }
+
+    .thumb-item.active .thumb-label {
+      color: #c5d0de;
+    }
   </style>
 </head>
+
 <body>
 
   <div class="viewer">
@@ -300,7 +348,7 @@
             -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27
             .68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
             .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
-            0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
           </svg>
           seoldi/redwoods
         </a>
@@ -317,34 +365,34 @@
 
   <script>
     var SCREENS = [
-      { label: '메인',        file: 'static/index.html',       thumb: null },
-      { label: '브랜드',      file: 'static/brand.html',       thumb: null },
-      { label: '단지개요',    file: 'static/overview.html',    thumb: null },
-      { label: '배치도',      file: 'static/placement.html',   thumb: null },
-      { label: '평면도',      file: 'static/plane.html',       thumb: null },
-      { label: '커뮤니티',    file: 'static/complex.html',     thumb: null },
-      { label: '프리미엄',    file: 'static/premium.html',     thumb: null },
-      { label: '시공사',      file: 'static/constructor.html', thumb: null },
-      { label: 'e-모델하우스', file: 'static/emodel.html',    thumb: null },
-      { label: '동호수배치',  file: 'static/layout.html',      thumb: null },
+      { label: '메인', file: 'static/index.html', thumb: null },
+      { label: '브랜드', file: 'static/brand.html', thumb: null },
+      { label: '단지개요', file: 'static/overview.html', thumb: null },
+      { label: '배치도', file: 'static/placement.html', thumb: null },
+      { label: '평면도', file: 'static/plane.html', thumb: null },
+      { label: '커뮤니티', file: 'static/complex.html', thumb: null },
+      { label: '프리미엄', file: 'static/premium.html', thumb: null },
+      { label: '시공사', file: 'static/constructor.html', thumb: null },
+      { label: 'e-모델하우스', file: 'static/emodel.html', thumb: null },
+      { label: '동호수배치', file: 'static/layout.html', thumb: null },
     ];
 
-    var W = 1200, H = 675;
-    var THUMB_H    = 144;  // strip 128px + bottom padding 16px
-    var BEZEL_W    = 148;  // 36px lid padding + 2×(44px arrow + 12px gap)
-    var BEZEL_H    = 100;  // lid chrome 47px + base 20px + gap 7px + gh-link 26px
+    var W = 1920, H = 1080;
+    var THUMB_H = 144;  // strip 128px + bottom padding 16px
+    var BEZEL_W = 148;  // 36px lid padding + 2×(44px arrow + 12px gap)
+    var BEZEL_H = 100;  // lid chrome 47px + base 20px + gap 7px + gh-link 26px
 
-    var frame  = document.getElementById('pageFrame');
-    var wrap   = document.getElementById('pageWrap');
-    var strip  = document.getElementById('thumbStrip');
+    var frame = document.getElementById('pageFrame');
+    var wrap = document.getElementById('pageWrap');
+    var strip = document.getElementById('thumbStrip');
     var activeItem = null;
-    var items  = [];
+    var items = [];
 
     var savedIdx = parseInt(localStorage.getItem('rwScreen') || '0');
     if (savedIdx < 0 || savedIdx >= SCREENS.length) savedIdx = 0;
 
     // Build thumbnails
-    SCREENS.forEach(function(s, i) {
+    SCREENS.forEach(function (s, i) {
       var item = document.createElement('div');
       item.className = 'thumb-item' + (i === savedIdx ? ' active' : '');
       if (i === savedIdx) activeItem = item;
@@ -361,10 +409,10 @@
         media.className = 'thumb-placeholder';
         media.innerHTML =
           '<div class="thumb-bar">' +
-            '<div class="thumb-dot"></div>' +
-            '<div class="thumb-dot"></div>' +
-            '<div class="thumb-dot"></div>' +
-            '<div class="thumb-url"></div>' +
+          '<div class="thumb-dot"></div>' +
+          '<div class="thumb-dot"></div>' +
+          '<div class="thumb-dot"></div>' +
+          '<div class="thumb-url"></div>' +
           '</div>' +
           '<div class="thumb-content">' + s.label + '</div>';
       }
@@ -376,7 +424,7 @@
       item.appendChild(media);
       item.appendChild(lbl);
 
-      item.addEventListener('click', function() {
+      item.addEventListener('click', function () {
         if (activeItem) activeItem.classList.remove('active');
         activeItem = item;
         item.classList.add('active');
@@ -397,41 +445,41 @@
     // Restore saved screen
     if (savedIdx > 0) {
       frame.src = SCREENS[savedIdx].file;
-      setTimeout(function() { scrollToCenter(items[savedIdx]); }, 100);
+      setTimeout(function () { scrollToCenter(items[savedIdx]); }, 100);
     }
 
     // Strip arrows
     var SCROLL_STEP = 540;
-    document.getElementById('stripPrev').addEventListener('click', function() {
+    document.getElementById('stripPrev').addEventListener('click', function () {
       strip.scrollBy({ left: -SCROLL_STEP, behavior: 'smooth' });
     });
-    document.getElementById('stripNext').addEventListener('click', function() {
+    document.getElementById('stripNext').addEventListener('click', function () {
       strip.scrollBy({ left: SCROLL_STEP, behavior: 'smooth' });
     });
 
     // Slide arrows
     function navigateScreen(dir) {
-      var cur  = items.indexOf(activeItem);
+      var cur = items.indexOf(activeItem);
       var next = cur + dir;
       if (next >= 0 && next < items.length) items[next].click();
     }
-    document.getElementById('slidePrev').addEventListener('click', function() { navigateScreen(-1); });
-    document.getElementById('slideNext').addEventListener('click', function() { navigateScreen(1); });
+    document.getElementById('slidePrev').addEventListener('click', function () { navigateScreen(-1); });
+    document.getElementById('slideNext').addEventListener('click', function () { navigateScreen(1); });
 
     // Keyboard
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
       navigateScreen(e.key === 'ArrowLeft' ? -1 : 1);
     });
 
     // Scale iframe to fit
     function fit() {
-      var pad    = 20;
-      var availW = window.innerWidth  - pad - BEZEL_W;
+      var pad = 20;
+      var availW = window.innerWidth - pad - BEZEL_W;
       var availH = window.innerHeight - THUMB_H - pad - BEZEL_H;
-      var scale  = Math.min(availW / W, availH / H) * 0.82;
+      var scale = Math.min(availW / W, availH / H) * 0.82;
       frame.style.transform = 'scale(' + scale + ')';
-      wrap.style.width  = Math.round(W * scale) + 'px';
+      wrap.style.width = Math.round(W * scale) + 'px';
       wrap.style.height = Math.round(H * scale) + 'px';
     }
 
@@ -439,4 +487,5 @@
     window.addEventListener('resize', fit);
   </script>
 </body>
+
 </html>
