@@ -1,0 +1,75 @@
+@charset "utf-8";
+/* 새글 스킨 (latest) */
+
+.latest-tl  {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0,0,0,0.5);
+}
+
+.latest-tl h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.latest-tl a.more {
+  align-items: center;
+  display: flex;
+  width: 16px;
+  height: 35px;
+  position: relative;
+}
+
+.latest-tl a.more span {
+  position: absolute;
+  background-color: #000;
+  display: block;
+  width: 16px;
+  height: 2px;
+}
+
+.latest-tl a.more span:last-child {
+  transform: rotate(90deg);
+}
+
+.latest-tl a:hover {
+
+}
+
+.latest-list li {
+  font-size: 18px;
+  margin-top: 15px;
+}
+
+.latest-list li:not(:last-child) {
+  border-bottom: 1px solid rgba(50,50,50,0.3);
+  padding-bottom: 15px;
+}
+
+.latest-list li a {
+  font-weight: 500;
+  color: #222;
+  display: block;
+}
+
+.latest-list li:hover a {
+  color: #db5435;
+  font-weight: 500;
+}
+
+.latest-list li .lt_date {
+  color: #1d1d1d;
+  font-size: 14px;
+}
+
+.latest-list li:hover .lt_date {
+  color: #111;
+}
+
+@media screen and (max-width: 768px) {
+  .latest-list li {
+    font-size: 16px;
+    letter-spacing: -0.5px;
+  }
+}

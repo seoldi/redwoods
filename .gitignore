@@ -1,0 +1,7 @@
+# 환경 설정
+config.php
+.vscode/
+
+# OS 메타
+.DS_Store
+Thumbs.db

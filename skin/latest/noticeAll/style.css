@@ -1,0 +1,50 @@
+@charset "utf-8";
+/* 전체게시판 최신글 리스트 스킨 (latest) */
+#allLeast {
+  width: 100%;
+}
+
+#allLeast li {
+  display: flex;
+  align-items: center;
+  padding: 14px 0;
+}
+
+#allLeast li:first-child {
+  padding-top: 0;
+}
+
+#allLeast li:not(:last-child) {
+  border-bottom: 1px dashed #a6a6a6;
+}
+
+#allLeast li .cate {
+  background: #eeeeee;
+  border-radius: 40px;
+  display: block;
+  width: 85px;
+  text-align: center;
+  padding: 4px 0;
+  margin-right: 13px;
+}
+
+#allLeast li:hover .cate {
+  background-color: #d4eae7;
+}
+
+#allLeast li a {
+  color: #000;
+  align-items: center;
+  font-size: 17px;
+}
+
+#allLeast li:hover a {
+  color: #0345b7;
+}
+
+#allLeast li .date {
+  margin-left: auto;
+  font-size: 15px;
+  font-weight: 300;
+  color: #484848;
+}

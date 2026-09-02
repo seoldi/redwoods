@@ -1,0 +1,36 @@
+@charset "utf-8";
+
+/* 공통 */
+.check_box input[type="checkbox"]{display:none;}
+.check_box input[type="checkbox"] + label{position:relative;font-size:15px;margin-left:30px}
+.check_box input[type="checkbox"] + label:before{content:"";display:block;position:absolute;width:20px;height:20px;border:solid 1px #dddddd;top:-2px;left:-30px}
+.check_box input[type="checkbox"]:checked + label:before{background:#000000 url(./img/check.svg) no-repeat center;background-size:100%}
+.btn_submit {width:100%;height:60px;background:#000000;border:solid 1px #000000;color:#ffffff;margin:30px 0 10px;font-size:15px;transition:all .2s}
+.btn_submit:hover {background:#ffffff;border:solid 1px #4e43ff;color:#4e43ff}
+
+/* 로그인 */
+.mem01_skin {width:500px;margin:0 auto;padding:50px 0;}
+.mem01_skin .mem_title {font-size:25px;text-align:center}
+.mem01_skin .mb_log_cate {display:flex;align-items:center;height:65px;border-bottom:solid 1px #eeeeee;margin-top:50px}
+.mem01_skin .mb_log_cate>* {position:relative;width:50%;line-height:65px;text-align:center;font-size:20px}
+.mem01_skin .mb_log_cate>*:after {content:'';display:block;background:#000000;width:0;height:3px;position:absolute;bottom:0;left:0;transition:all .2s}
+.mem01_skin .mb_log_cate .on:after {width:100%}
+.mem01_skin .mb_log_cate a {color:#999999}
+.mem01_skin .mb_log_cate a:hover {color:#000000}
+.mem01_skin .mb_log_cate a:after {left:50%;}
+.mem01_skin .mb_log_cate a:hover:after {left:0;width:100%;}
+
+#login_fs {padding-top:80px;}
+#login_fs .frm_input {width:100%;height:60px;border:solid 1px #eeeeee;border-radius:0;padding-left:20px;font-size:15px}
+#login_fs #login_pw {margin-top:10px}
+
+#login_info {margin-top:15px}
+
+#lost_password {font-size:13px;text-align:center}
+#lost_password a:hover{border-bottom:solid 1px #000000}
+
+/* 회원가입 */
+
+
+
+
