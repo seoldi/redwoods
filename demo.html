@@ -1,187 +1,442 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
   <title>Redwoods — Demo</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --thumb-h: 128px;
+      --accent:  #7c6248;
+      --bg:      #0d1117;
+      --panel:   #111820;
+      --border:  rgba(255,255,255,.06);
+    }
+
     body {
+      background: var(--bg);
       display: flex;
       flex-direction: column;
       height: 100vh;
-      background: #0d1117;
-      font-family: -apple-system, 'Segoe UI', sans-serif;
+      overflow: hidden;
+      font-family: "Pretendard", "Malgun Gothic", sans-serif;
+      color: #c5d0de;
     }
 
-    /* ── 상단 탭바 */
-    .topbar {
-      display: flex;
-      align-items: center;
-      background: #161b22;
-      border-bottom: 1px solid #30363d;
-      padding: 0 20px;
-      height: 48px;
-      flex-shrink: 0;
-      gap: 0;
-    }
-
-    .logo {
-      font-size: 13px;
-      font-weight: 700;
-      color: #e6edf3;
-      margin-right: 20px;
-      white-space: nowrap;
-      letter-spacing: .02em;
-    }
-
-    .nav {
-      display: flex;
-      flex: 1;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .nav::-webkit-scrollbar { display: none; }
-
-    .nav button {
-      background: none;
-      border: none;
-      border-bottom: 2px solid transparent;
-      color: #8b949e;
-      font-size: 12.5px;
-      padding: 0 13px;
-      height: 48px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: color .15s, border-color .15s;
-      flex-shrink: 0;
-    }
-    .nav button:hover  { color: #c9d1d9; }
-    .nav button.active { color: #58a6ff; border-bottom-color: #58a6ff; }
-
+    /* ── GitHub link ── */
     .gh-link {
-      color: #8b949e;
-      font-size: 12px;
-      text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 5px;
-      margin-left: 16px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: color .15s;
-    }
-    .gh-link:hover { color: #e6edf3; }
-
-    /* ── 주소창 바 */
-    .urlbar {
-      display: flex;
-      align-items: center;
-      background: #0d1117;
-      border-bottom: 1px solid #21262d;
-      padding: 6px 20px;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-
-    .url-dots { display: flex; gap: 5px; }
-    .url-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-    }
-    .url-dot.r { background: #ff5f56; }
-    .url-dot.y { background: #ffbd2e; }
-    .url-dot.g { background: #27c93f; }
-
-    .url-field {
-      flex: 1;
-      background: #161b22;
-      border: 1px solid #30363d;
+      justify-content: center;
+      gap: 6px;
+      padding: 5px 12px;
       border-radius: 6px;
-      color: #8b949e;
-      font-size: 12px;
-      padding: 4px 12px;
-      text-align: center;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-
-    .live-link {
-      color: #58a6ff;
-      font-size: 11.5px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: #7a8fa8;
+      font-size: .68rem;
+      letter-spacing: .04em;
       text-decoration: none;
-      white-space: nowrap;
-      margin-left: auto;
+      transition: color .15s, background .15s, border-color .15s;
+      flex-shrink: 0;
+      margin-top: 6px;
     }
-    .live-link:hover { text-decoration: underline; }
+    .gh-link:hover {
+      color: #c5d0de;
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.20);
+    }
 
-    /* ── iframe */
-    iframe {
+    /* ── Slide arrows ── */
+    .laptop-wrap {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+    }
+    .laptop-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .slide-arrow {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
+      color: #5a7080;
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color .15s, background .15s, border-color .15s;
+      align-self: center;
+    }
+    .slide-arrow:hover {
+      color: #c5d0de;
+      background: rgba(255,255,255,.13);
+      border-color: rgba(255,255,255,.20);
+    }
+
+    /* ── Viewer ── */
+    .viewer {
       flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 10px;
+      min-height: 0;
+    }
+
+    /* ── Laptop Frame ── */
+    .laptop-lid {
+      background: linear-gradient(160deg, #26292f 0%, #1a1d23 100%);
+      border-radius: 14px 14px 3px 3px;
+      padding: 16px 18px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.10),
+        0 0 0 2px rgba(0,0,0,.60),
+        0 8px 16px rgba(0,0,0,.40),
+        0 24px 64px rgba(0,0,0,.60),
+        0 48px 120px rgba(0,0,0,.30),
+        inset 0 1px 0 rgba(255,255,255,.08),
+        inset 0 -1px 0 rgba(0,0,0,.40);
+    }
+    .laptop-cam {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #2b2f3a;
+      border: 1px solid rgba(0,0,0,.5);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.03);
+      flex-shrink: 0;
+    }
+    .laptop-screen {
+      border-radius: 3px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px #000, inset 0 0 0 1px rgba(255,255,255,.02);
+      background: #000;
+      line-height: 0;
+    }
+    .laptop-base {
+      width: calc(100% + 24px);
+      height: 20px;
+      background: linear-gradient(180deg, #2a2d35 0%, #1e2025 100%);
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.5);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .laptop-base::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%; transform: translateX(-50%);
+      width: 56px; height: 7px;
+      border-radius: 3px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+    }
+
+    .page-wrap {
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .page-wrap iframe {
+      display: block;
+      width: 1440px;
+      height: 900px;
       border: none;
-      width: 100%;
+      transform-origin: top left;
       background: #fff;
     }
+
+    /* ── Thumbnail strip ── */
+    .strip-area {
+      flex-shrink: 0;
+      background: var(--panel);
+      border-top: 1px solid var(--border);
+      padding-bottom: 16px;
+      display: flex;
+      align-items: center;
+    }
+    .strip-arrow {
+      flex-shrink: 0;
+      width: 36px;
+      height: var(--thumb-h);
+      background: none;
+      border: none;
+      color: #3d4f62;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color .15s, background .15s;
+    }
+    .strip-arrow:hover {
+      color: var(--accent);
+      background: rgba(124,98,72,.08);
+    }
+    .thumbstrip {
+      height: var(--thumb-h);
+      flex: 1;
+      overflow-x: auto;
+      overflow-y: hidden;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 4px;
+      scroll-behavior: smooth;
+    }
+    .thumbstrip::-webkit-scrollbar { height: 3px; }
+    .thumbstrip::-webkit-scrollbar-track { background: transparent; }
+    .thumbstrip::-webkit-scrollbar-thumb { background: #202c3a; border-radius: 2px; }
+
+    .thumb-item {
+      flex-shrink: 0;
+      width: 160px;
+      cursor: pointer;
+      border-radius: 5px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      transition: border-color .15s;
+    }
+    .thumb-item:hover  { border-color: rgba(124,98,72,.5); }
+    .thumb-item.active { border-color: var(--accent); }
+
+    .thumb-img {
+      width: 160px; height: 90px;
+      object-fit: cover;
+      display: block;
+      background: #1a2230;
+    }
+
+    /* 스크린샷 없을 때 placeholder — 미니 브라우저 스타일 */
+    .thumb-placeholder {
+      width: 160px; height: 90px;
+      background: linear-gradient(160deg, #1e2630 0%, #161a20 100%);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .thumb-bar {
+      background: #252b34;
+      height: 14px;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      gap: 3px;
+      flex-shrink: 0;
+    }
+    .thumb-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+    }
+    .thumb-url {
+      flex: 1;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255,255,255,.07);
+      margin-left: 3px;
+    }
+    .thumb-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .6rem;
+      color: #4a5a6a;
+      letter-spacing: .05em;
+      padding: 4px;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .thumb-label {
+      background: #0f1620;
+      padding: 4px 6px;
+      font-size: .62rem;
+      color: #6a7a8c;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+    }
+    .thumb-item.active .thumb-label { color: #c5d0de; }
   </style>
 </head>
 <body>
 
-  <div class="topbar">
-    <span class="logo">🏢 Redwoods</span>
-    <nav class="nav" id="nav">
-      <button data-src="static/index.html" data-label="메인" class="active">메인</button>
-      <button data-src="static/brand.html" data-label="브랜드">브랜드</button>
-      <button data-src="static/overview.html" data-label="단지개요">단지개요</button>
-      <button data-src="static/placement.html" data-label="배치도">배치도</button>
-      <button data-src="static/plane.html" data-label="평면도">평면도</button>
-      <button data-src="static/complex.html" data-label="커뮤니티">커뮤니티</button>
-      <button data-src="static/premium.html" data-label="프리미엄">프리미엄</button>
-      <button data-src="static/constructor.html" data-label="시공사">시공사</button>
-      <button data-src="static/emodel.html" data-label="e-모델하우스">e-모델하우스</button>
-      <button data-src="static/layout.html" data-label="동호수배치">동호수배치</button>
-    </nav>
-    <a class="gh-link" href="https://github.com/seoldi/redwoods" target="_blank" rel="noopener">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
-        0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
-        -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
-        .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
-        -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0
-        1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
-        1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01
-        1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-      </svg>
-      seoldi/redwoods
-    </a>
-  </div>
-
-  <div class="urlbar">
-    <div class="url-dots">
-      <div class="url-dot r"></div>
-      <div class="url-dot y"></div>
-      <div class="url-dot g"></div>
+  <div class="viewer">
+    <div class="laptop-wrap">
+      <button class="slide-arrow" id="slidePrev">&#8249;</button>
+      <div class="laptop-col">
+        <div class="laptop-lid">
+          <div class="laptop-cam"></div>
+          <div class="laptop-screen">
+            <div class="page-wrap" id="pageWrap">
+              <iframe src="static/index.html" id="pageFrame"></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="laptop-base"></div>
+        <a class="gh-link" href="https://github.com/seoldi/redwoods" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+            0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+            -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+            .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+            -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27
+            .68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+            .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
+            0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          seoldi/redwoods
+        </a>
+      </div>
+      <button class="slide-arrow" id="slideNext">&#8250;</button>
     </div>
-    <div class="url-field" id="urlField">static/index.html</div>
-    <a class="live-link" href="https://xn--9m1b22au1d9pl83bx1fvpfhtqo1bg6g.kr/" target="_blank" rel="noopener">운영 사이트 →</a>
   </div>
 
-  <iframe src="static/index.html" id="frame"></iframe>
+  <div class="strip-area">
+    <button class="strip-arrow" id="stripPrev">&#8249;</button>
+    <div class="thumbstrip" id="thumbStrip"></div>
+    <button class="strip-arrow" id="stripNext">&#8250;</button>
+  </div>
 
   <script>
-    var frame   = document.getElementById('frame');
-    var urlField = document.getElementById('urlField');
-    var buttons = document.querySelectorAll('.nav button');
+    var SCREENS = [
+      { label: '메인',        file: 'static/index.html',       thumb: null },
+      { label: '브랜드',      file: 'static/brand.html',       thumb: null },
+      { label: '단지개요',    file: 'static/overview.html',    thumb: null },
+      { label: '배치도',      file: 'static/placement.html',   thumb: null },
+      { label: '평면도',      file: 'static/plane.html',       thumb: null },
+      { label: '커뮤니티',    file: 'static/complex.html',     thumb: null },
+      { label: '프리미엄',    file: 'static/premium.html',     thumb: null },
+      { label: '시공사',      file: 'static/constructor.html', thumb: null },
+      { label: 'e-모델하우스', file: 'static/emodel.html',    thumb: null },
+      { label: '동호수배치',  file: 'static/layout.html',      thumb: null },
+    ];
 
-    buttons.forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        buttons.forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var src = btn.dataset.src;
-        frame.src = src;
-        urlField.textContent = btn.dataset.label;
+    var W = 1440, H = 900;
+    var THUMB_H    = 144;  // strip 128px + bottom padding 16px
+    var BEZEL_W    = 148;  // 36px lid padding + 2×(44px arrow + 12px gap)
+    var BEZEL_H    = 100;  // lid chrome 47px + base 20px + gap 7px + gh-link 26px
+
+    var frame  = document.getElementById('pageFrame');
+    var wrap   = document.getElementById('pageWrap');
+    var strip  = document.getElementById('thumbStrip');
+    var activeItem = null;
+    var items  = [];
+
+    var savedIdx = parseInt(localStorage.getItem('rwScreen') || '0');
+    if (savedIdx < 0 || savedIdx >= SCREENS.length) savedIdx = 0;
+
+    // Build thumbnails
+    SCREENS.forEach(function(s, i) {
+      var item = document.createElement('div');
+      item.className = 'thumb-item' + (i === savedIdx ? ' active' : '');
+      if (i === savedIdx) activeItem = item;
+
+      var media;
+      if (s.thumb) {
+        media = document.createElement('img');
+        media.className = 'thumb-img';
+        media.src = 'screenshots/' + s.thumb;
+        media.alt = s.label;
+        media.loading = 'lazy';
+      } else {
+        media = document.createElement('div');
+        media.className = 'thumb-placeholder';
+        media.innerHTML =
+          '<div class="thumb-bar">' +
+            '<div class="thumb-dot"></div>' +
+            '<div class="thumb-dot"></div>' +
+            '<div class="thumb-dot"></div>' +
+            '<div class="thumb-url"></div>' +
+          '</div>' +
+          '<div class="thumb-content">' + s.label + '</div>';
+      }
+
+      var lbl = document.createElement('div');
+      lbl.className = 'thumb-label';
+      lbl.textContent = s.label;
+
+      item.appendChild(media);
+      item.appendChild(lbl);
+
+      item.addEventListener('click', function() {
+        if (activeItem) activeItem.classList.remove('active');
+        activeItem = item;
+        item.classList.add('active');
+        frame.src = s.file;
+        localStorage.setItem('rwScreen', i);
+        scrollToCenter(item);
       });
-    });
-  </script>
 
+      items.push(item);
+      strip.appendChild(item);
+    });
+
+    function scrollToCenter(item) {
+      var left = item.offsetLeft - (strip.clientWidth / 2) + (item.offsetWidth / 2);
+      strip.scrollTo({ left: left, behavior: 'smooth' });
+    }
+
+    // Restore saved screen
+    if (savedIdx > 0) {
+      frame.src = SCREENS[savedIdx].file;
+      setTimeout(function() { scrollToCenter(items[savedIdx]); }, 100);
+    }
+
+    // Strip arrows
+    var SCROLL_STEP = 540;
+    document.getElementById('stripPrev').addEventListener('click', function() {
+      strip.scrollBy({ left: -SCROLL_STEP, behavior: 'smooth' });
+    });
+    document.getElementById('stripNext').addEventListener('click', function() {
+      strip.scrollBy({ left: SCROLL_STEP, behavior: 'smooth' });
+    });
+
+    // Slide arrows
+    function navigateScreen(dir) {
+      var cur  = items.indexOf(activeItem);
+      var next = cur + dir;
+      if (next >= 0 && next < items.length) items[next].click();
+    }
+    document.getElementById('slidePrev').addEventListener('click', function() { navigateScreen(-1); });
+    document.getElementById('slideNext').addEventListener('click', function() { navigateScreen(1); });
+
+    // Keyboard
+    document.addEventListener('keydown', function(e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      navigateScreen(e.key === 'ArrowLeft' ? -1 : 1);
+    });
+
+    // Scale iframe to fit
+    function fit() {
+      var pad    = 20;
+      var availW = window.innerWidth  - pad - BEZEL_W;
+      var availH = window.innerHeight - THUMB_H - pad - BEZEL_H;
+      var scale  = Math.min(availW / W, availH / H) * 0.82;
+      frame.style.transform = 'scale(' + scale + ')';
+      wrap.style.width  = Math.round(W * scale) + 'px';
+      wrap.style.height = Math.round(H * scale) + 'px';
+    }
+
+    fit();
+    window.addEventListener('resize', fit);
+  </script>
 </body>
 </html>
