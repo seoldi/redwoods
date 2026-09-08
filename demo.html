@@ -685,6 +685,17 @@
       if (e.key === 'ArrowRight') goTo(curIdx + 1);
     });
 
+    // Bubble iframe keydown to parent so arrow keys work after clicking inside the device
+    frame.addEventListener('load', function () {
+      try {
+        frame.contentDocument.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'Escape') {
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: e.key, bubbles: true }));
+          }
+        });
+      } catch (ignore) {}
+    });
+
     window.addEventListener('resize', fit);
   </script>
 
