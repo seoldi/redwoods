@@ -5,3 +5,6 @@ config.php
 # OS 메타
 .DS_Store
 Thumbs.db
+
+# 데모 전용 — 미사용 에셋
+img/git-bg.jpg

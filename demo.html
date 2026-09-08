@@ -12,84 +12,120 @@
     }
 
     :root {
-      --thumb-h: 128px;
-      --accent: #7c6248;
-      --bg: #0d1117;
-      --panel: #111820;
-      --border: rgba(255, 255, 255, .06);
+      --accent: #c4a87a;
     }
 
     body {
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
       height: 100vh;
       overflow: hidden;
       font-family: "Pretendard", "Malgun Gothic", sans-serif;
-      color: #c5d0de;
-    }
-
-    /* ── GitHub link ── */
-    .gh-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 5px 12px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, .06);
-      border: 1px solid rgba(255, 255, 255, .10);
-      color: #7a8fa8;
-      font-size: .68rem;
-      letter-spacing: .04em;
-      text-decoration: none;
-      transition: color .15s, background .15s, border-color .15s;
-      flex-shrink: 0;
-      margin-top: 6px;
-    }
-
-    .gh-link:hover {
-      color: #c5d0de;
-      background: rgba(255, 255, 255, .10);
-      border-color: rgba(255, 255, 255, .20);
-    }
-
-    /* ── Slide arrows ── */
-    .laptop-wrap {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .laptop-col {
       display: flex;
       flex-direction: column;
+      background: radial-gradient(ellipse at 65% 30%, #898989 0%, #2f2f2f 40%, #111111 100%);
+      position: relative;
+    }
+
+    /* Luxury texture overlay */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.45 0.68' numOctaves='6' seed='12' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23t)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+      opacity: 1;
+      mix-blend-mode: overlay;
+    }
+
+
+    /* ── Header ── */
+    header {
+      flex-shrink: 0;
+      height: 52px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 0 24px;
+      background: rgb(17 17 17 / 80%);
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      z-index: 10;
+      color: #fff;
+    }
+
+    .header-left {
+      display: flex;
       align-items: center;
     }
 
-    .slide-arrow {
-      flex-shrink: 0;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, .07);
-      border: 1px solid rgba(255, 255, 255, .10);
-      color: #5a7080;
-      font-size: 1.6rem;
-      line-height: 1;
-      cursor: pointer;
+    .header-center {
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: color .15s, background .15s, border-color .15s;
-      align-self: center;
     }
 
-    .slide-arrow:hover {
-      color: #c5d0de;
+    .header-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .mode-group {
+      display: flex;
+      background: rgba(255, 255, 255, .09);
+      border-radius: 8px;
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .mode-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border: none;
+      border-radius: 5px;
+      background: none;
+      color: rgba(255, 255, 255, .40);
+      font-size: .67rem;
+      font-family: inherit;
+      cursor: pointer;
+      letter-spacing: .04em;
+      transition: color .15s, background .15s, box-shadow .15s;
+      white-space: nowrap;
+    }
+
+    .mode-btn:hover {
+      color: rgba(255, 255, 255, .70);
+    }
+
+    .mode-btn.active {
+      background: #fff;
+      color: #111;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .30);
+    }
+
+    .gh-link,
+    .about-link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 11px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      color: rgba(255, 255, 255, .40);
+      font-size: .65rem;
+      letter-spacing: .05em;
+      text-decoration: none;
+      transition: color .15s, background .15s, border-color .15s;
+    }
+
+    .gh-link:hover,
+    .about-link:hover {
+      color: rgba(255, 255, 255, .85);
       background: rgba(255, 255, 255, .13);
-      border-color: rgba(255, 255, 255, .20);
+      border-color: rgba(255, 255, 255, .22);
     }
 
     /* ── Viewer ── */
@@ -98,404 +134,397 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      padding: 10px 10px 190px;
+      padding: 20px 24px 64px;
       min-height: 0;
+      position: relative;
+      z-index: 2;
     }
 
-    /* ── Laptop Frame ── */
-    .laptop-lid {
-      background: linear-gradient(160deg, #26292f 0%, #1a1d23 100%);
-      border-radius: 14px 14px 3px 3px;
-      padding: 16px 18px 12px;
+    /* ── Arrows ── */
+    .slide-arrow {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .10);
+      border: 1px solid rgba(255, 255, 255, .15);
+      color: rgba(255, 255, 255, .45);
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color .15s, background .15s, border-color .15s;
+      line-height: 1;
+    }
+
+    .slide-arrow:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, .22);
+      border-color: rgba(255, 255, 255, .35);
+    }
+
+    /* ── Device col ── */
+    .device-col {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 7px;
+      margin: 0 14px;
+      position: relative;
+    }
+
+    /* ── Device frame ── */
+    .device-frame {
+      position: relative;
+      background: #1c1c1c;
       box-shadow:
-        0 0 0 1px rgba(255, 255, 255, .10),
-        0 0 0 2px rgba(0, 0, 0, .60),
-        0 8px 16px rgba(0, 0, 0, .40),
-        0 24px 64px rgba(0, 0, 0, .60),
-        0 48px 120px rgba(0, 0, 0, .30),
-        inset 0 1px 0 rgba(255, 255, 255, .08),
-        inset 0 -1px 0 rgba(0, 0, 0, .40);
+        0 0 0 1px rgba(255, 255, 255, .12),
+        0 24px 80px rgba(0, 0, 0, .65),
+        0 4px 16px rgba(0, 0, 0, .40);
     }
 
-    .laptop-cam {
-      width: 6px;
-      height: 6px;
+    .device-frame.mode-pc {
+      border-radius: 20px;
+      padding: 4px;
+      padding-top: 20px;
+    }
+
+    .device-frame.mode-pc::before {
+      content: '';
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
-      background: #2b2f3a;
-      border: 1px solid rgba(0, 0, 0, .5);
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .03);
-      flex-shrink: 0;
+      background: #3a3a3a;
     }
 
-    .laptop-screen {
-      border-radius: 3px;
-      overflow: hidden;
-      box-shadow: 0 0 0 1px #000, inset 0 0 0 1px rgba(255, 255, 255, .02);
+    .device-frame.mode-mobile {
+      border-radius: 42px;
+      padding: 40px 12px 28px;
+    }
+
+    .device-frame.mode-mobile::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 64px;
+      height: 16px;
+      border-radius: 8px;
       background: #000;
+    }
+
+    .device-frame.mode-mobile::after {
+      content: '';
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 72px;
+      height: 3px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, .18);
+    }
+
+    /* Laptop base */
+    .laptop-base {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      display: none;
+    }
+
+    .laptop-base-top {
+      width: 100%;
+      height: 8px;
+      background: #242424;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, .06);
+    }
+
+    .laptop-base-foot {
+      width: 58%;
+      height: 5px;
+      background: #2c2c2c;
+      border-radius: 0 0 8px 8px;
+    }
+
+    /* ── Screen ── */
+    .device-screen {
+      overflow: hidden;
+      border-radius: 18px;
       line-height: 0;
     }
 
-    .laptop-base {
-      width: calc(100% + 24px);
-      height: 20px;
-      background: linear-gradient(180deg, #2a2d35 0%, #1e2025 100%);
-      border-radius: 0 0 8px 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, .5);
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .laptop-base::after {
-      content: '';
-      position: absolute;
-      bottom: 4px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 56px;
-      height: 7px;
-      border-radius: 3px;
-      background: rgba(255, 255, 255, .04);
-      border: 1px solid rgba(255, 255, 255, .07);
+    .mode-mobile .device-screen {
+      border-radius: 24px;
     }
 
     .page-wrap {
       overflow: hidden;
-      flex-shrink: 0;
     }
 
     .page-wrap iframe {
       display: block;
-      width: 1920px;
-      height: 1080px;
       border: none;
       transform-origin: top left;
       background: #fff;
     }
 
-    /* ── Thumbnail strip (floating) ── */
-    .strip-area {
-      position: fixed;
-      bottom: 20px;
+    /* ── Thumbnail nav ── */
+    .thumb-nav {
+      position: absolute;
+      bottom: -35px;
       left: 50%;
       transform: translateX(-50%);
-      width: calc(100% - 80px);
-      max-width: 1100px;
       display: flex;
       align-items: center;
-      background: rgba(17, 24, 32, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, .09);
-      border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, .55), 0 2px 8px rgba(0, 0, 0, .4);
-      padding: 8px 0;
-      z-index: 100;
+      gap: 5px;
+      padding: 8px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(12, 12, 12, .72);
+      backdrop-filter: blur(20px) saturate(1.5);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .45), 0 2px 8px rgba(0, 0, 0, .28);
+      white-space: nowrap;
+      z-index: 20;
     }
 
-    .strip-arrow {
+    .thumb-nav::-webkit-scrollbar {
+      height: 0;
+    }
+
+    .thumb-btn {
       flex-shrink: 0;
-      width: 36px;
-      height: var(--thumb-h);
-      background: none;
-      border: none;
-      color: #3d4f62;
-      font-size: 1.5rem;
-      line-height: 1;
+      min-width: 100px;
+      height: 56px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .06);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: color .15s, background .15s;
-    }
-
-    .strip-arrow:hover {
-      color: var(--accent);
-      background: rgba(124, 98, 72, .08);
-    }
-
-    .thumbstrip {
-      height: var(--thumb-h);
-      flex: 1;
-      overflow-x: auto;
-      overflow-y: hidden;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 0 4px;
-      scroll-behavior: smooth;
-    }
-
-    .thumbstrip::-webkit-scrollbar {
-      height: 3px;
-    }
-
-    .thumbstrip::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .thumbstrip::-webkit-scrollbar-thumb {
-      background: #202c3a;
-      border-radius: 2px;
-    }
-
-    .thumb-item {
-      flex-shrink: 0;
-      width: 160px;
-      cursor: pointer;
-      border-radius: 5px;
-      overflow: hidden;
-      border: 2px solid transparent;
-      transition: border-color .15s;
-    }
-
-    .thumb-item:hover {
-      border-color: rgba(124, 98, 72, .5);
-    }
-
-    .thumb-item.active {
-      border-color: var(--accent);
-    }
-
-    .thumb-img {
-      width: 160px;
-      height: 90px;
-      object-fit: cover;
-      display: block;
-      background: #1a2230;
-    }
-
-    /* 스크린샷 없을 때 placeholder — 미니 브라우저 스타일 */
-    .thumb-placeholder {
-      width: 160px;
-      height: 90px;
-      background: linear-gradient(160deg, #1e2630 0%, #161a20 100%);
       display: flex;
       flex-direction: column;
-      overflow: hidden;
-    }
-
-    .thumb-bar {
-      background: #252b34;
-      height: 14px;
-      display: flex;
       align-items: center;
-      padding: 0 5px;
+      justify-content: center;
       gap: 3px;
-      flex-shrink: 0;
+      padding: 0 12px;
+      transition: border-color .15s, background .15s, box-shadow .15s;
+      white-space: nowrap;
     }
 
-    .thumb-dot {
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
+    .thumb-btn:hover {
+      border-color: rgba(255, 255, 255, .22);
       background: rgba(255, 255, 255, .12);
     }
 
-    .thumb-url {
-      flex: 1;
-      height: 6px;
-      border-radius: 3px;
-      background: rgba(255, 255, 255, .07);
-      margin-left: 3px;
+    .thumb-btn.active {
+      border-color: rgba(255, 255, 255, .45);
+      background: rgba(255, 255, 255, .14);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .30);
     }
 
-    .thumb-content {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: .6rem;
-      color: #4a5a6a;
-      letter-spacing: .05em;
-      padding: 4px;
-      text-align: center;
-      line-height: 1.4;
+    .thumb-num {
+      font-size: .56rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      color: rgba(255, 255, 255, .22);
+    }
+
+    .thumb-btn.active .thumb-num {
+      color: var(--accent);
     }
 
     .thumb-label {
-      background: #0f1620;
-      padding: 4px 6px;
-      font-size: .62rem;
-      color: #6a7a8c;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: center;
+      font-size: .66rem;
+      letter-spacing: .04em;
+      color: rgba(255, 255, 255, .38);
     }
 
-    .thumb-item.active .thumb-label {
-      color: #c5d0de;
+    .thumb-btn.active .thumb-label {
+      color: rgba(255, 255, 255, .90);
+      font-weight: 600;
     }
   </style>
 </head>
 
 <body>
 
+  <header>
+    <div class="header-left">
+      <a class="gh-link" href="https://github.com/seoldi/redwoods" target="_blank" rel="noopener">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+          0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+          -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
+          .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
+          -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27
+          .68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
+          .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
+          0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+        </svg>
+        GitHub
+      </a>
+    </div>
+
+    <div class="header-center">
+      <div class="mode-group">
+        <button class="mode-btn" data-mode="pc">
+          <svg width="13" height="10" viewBox="0 0 14 11" fill="none" stroke="currentColor" stroke-width="1.4"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x=".7" y=".7" width="12.6" height="7.8" rx="1.2" />
+            <line x1="4" y1="10.3" x2="10" y2="10.3" />
+            <line x1="7" y1="8.5" x2="7" y2="10.3" />
+          </svg>
+          PC
+        </button>
+        <button class="mode-btn" data-mode="mobile">
+          <svg width="7" height="12" viewBox="0 0 8 13" fill="none" stroke="currentColor" stroke-width="1.4"
+            stroke-linecap="round">
+            <rect x=".7" y=".7" width="6.6" height="11.6" rx="1.6" />
+            <line x1="2.5" y1="10.2" x2="5.5" y2="10.2" />
+          </svg>
+          Mobile
+        </button>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <a class="about-link" href="https://github.com/seoldi" target="_blank" rel="noopener">Credits</a>
+    </div>
+  </header>
+
   <div class="viewer">
-    <div class="laptop-wrap">
-      <button class="slide-arrow" id="slidePrev">&#8249;</button>
-      <div class="laptop-col">
-        <div class="laptop-lid">
-          <div class="laptop-cam"></div>
-          <div class="laptop-screen">
-            <div class="page-wrap" id="pageWrap">
-              <iframe src="static/index.html" id="pageFrame"></iframe>
-            </div>
+    <button class="slide-arrow" id="slidePrev">&#8249;</button>
+
+    <div class="device-col">
+      <div class="device-frame" id="deviceFrame">
+        <div class="device-screen">
+          <div class="page-wrap" id="pageWrap">
+            <iframe src="static/index.html" id="pageFrame"></iframe>
           </div>
         </div>
-        <div class="laptop-base"></div>
-        <a class="gh-link" href="https://github.com/seoldi/redwoods" target="_blank" rel="noopener">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor">
-            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
-            0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
-            -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66
-            .07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15
-            -.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27
-            .68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12
-            .51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48
-            0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-          </svg>
-          seoldi/redwoods
-        </a>
       </div>
-      <button class="slide-arrow" id="slideNext">&#8250;</button>
+      <div class="laptop-base" id="laptopBase">
+        <div class="laptop-base-top"></div>
+        <div class="laptop-base-foot"></div>
+      </div>
+      <div class="thumb-nav" id="thumbNav"></div>
     </div>
-  </div>
 
-  <div class="strip-area">
-    <button class="strip-arrow" id="stripPrev">&#8249;</button>
-    <div class="thumbstrip" id="thumbStrip"></div>
-    <button class="strip-arrow" id="stripNext">&#8250;</button>
+    <button class="slide-arrow" id="slideNext">&#8250;</button>
   </div>
 
   <script>
     var SCREENS = [
-      { label: '메인', file: 'static/index.html', thumb: null },
-      { label: '브랜드', file: 'static/brand.html', thumb: null },
-      { label: '단지개요', file: 'static/overview.html', thumb: null },
-      { label: '배치도', file: 'static/placement.html', thumb: null },
-      { label: '평면도', file: 'static/plane.html', thumb: null },
-      { label: '커뮤니티', file: 'static/complex.html', thumb: null },
-      { label: '프리미엄', file: 'static/premium.html', thumb: null },
-      { label: '시공사', file: 'static/constructor.html', thumb: null },
-      { label: 'e-모델하우스', file: 'static/emodel.html', thumb: null },
-      { label: '동호수배치', file: 'static/layout.html', thumb: null },
+      { label: '메인', file: 'static/index.html' },
+      { label: '브랜드', file: 'static/brand.html' },
+      { label: '단지개요', file: 'static/overview.html' },
+      { label: '배치도', file: 'static/placement.html' },
+      { label: '평면도', file: 'static/plane.html' },
+      { label: '커뮤니티', file: 'static/complex.html' },
+      { label: '프리미엄', file: 'static/premium.html' },
+      { label: '시공사', file: 'static/constructor.html' },
+      { label: 'e-모델하우스', file: 'static/emodel.html' },
+      { label: '동호수배치', file: 'static/layout.html' },
     ];
 
-    var W = 1920, H = 1080;
-    var THUMB_H = 144;  // strip 128px + bottom padding 16px
-    var BEZEL_W = 148;  // 36px lid padding + 2×(44px arrow + 12px gap)
-    var BEZEL_H = 100;  // lid chrome 47px + base 20px + gap 7px + gh-link 26px
+    var MODES = {
+      pc: { W: 1920, H: 1080, BEZEL_W: 148, BEZEL_H: 90 },
+      mobile: { W: 390, H: 844, BEZEL_W: 148, BEZEL_H: 116 },
+    };
+    var HEADER_H = 52;
+    var THUMB_H = 48;
 
     var frame = document.getElementById('pageFrame');
     var wrap = document.getElementById('pageWrap');
-    var strip = document.getElementById('thumbStrip');
-    var activeItem = null;
-    var items = [];
+    var deviceFrame = document.getElementById('deviceFrame');
+    var laptopBase = document.getElementById('laptopBase');
+    var modeBtns = document.querySelectorAll('.mode-btn');
+    var thumbNav = document.getElementById('thumbNav');
 
-    var savedIdx = parseInt(localStorage.getItem('rwScreen') || '0');
-    if (savedIdx < 0 || savedIdx >= SCREENS.length) savedIdx = 0;
+    var curMode = localStorage.getItem('rwMode') || 'pc';
+    var curIdx = parseInt(localStorage.getItem('rwScreen') || '0');
+    if (curIdx < 0 || curIdx >= SCREENS.length) curIdx = 0;
 
     // Build thumbnails
     SCREENS.forEach(function (s, i) {
-      var item = document.createElement('div');
-      item.className = 'thumb-item' + (i === savedIdx ? ' active' : '');
-      if (i === savedIdx) activeItem = item;
+      var btn = document.createElement('button');
+      btn.className = 'thumb-btn';
+      btn.dataset.idx = i;
+      btn.innerHTML =
+        '<span class="thumb-num">' + String(i + 1).padStart(2, '0') + '</span>' +
+        '<span class="thumb-label">' + s.label + '</span>';
+      btn.addEventListener('click', function () { goTo(i); });
+      thumbNav.appendChild(btn);
+    });
 
-      var media;
-      if (s.thumb) {
-        media = document.createElement('img');
-        media.className = 'thumb-img';
-        media.src = 'screenshots/' + s.thumb;
-        media.alt = s.label;
-        media.loading = 'lazy';
-      } else {
-        media = document.createElement('div');
-        media.className = 'thumb-placeholder';
-        media.innerHTML =
-          '<div class="thumb-bar">' +
-          '<div class="thumb-dot"></div>' +
-          '<div class="thumb-dot"></div>' +
-          '<div class="thumb-dot"></div>' +
-          '<div class="thumb-url"></div>' +
-          '</div>' +
-          '<div class="thumb-content">' + s.label + '</div>';
-      }
-
-      var lbl = document.createElement('div');
-      lbl.className = 'thumb-label';
-      lbl.textContent = s.label;
-
-      item.appendChild(media);
-      item.appendChild(lbl);
-
-      item.addEventListener('click', function () {
-        if (activeItem) activeItem.classList.remove('active');
-        activeItem = item;
-        item.classList.add('active');
-        frame.src = s.file;
-        localStorage.setItem('rwScreen', i);
-        scrollToCenter(item);
+    function updateThumbActive() {
+      document.querySelectorAll('.thumb-btn').forEach(function (btn) {
+        btn.classList.toggle('active', parseInt(btn.dataset.idx) === curIdx);
       });
-
-      items.push(item);
-      strip.appendChild(item);
-    });
-
-    function scrollToCenter(item) {
-      var left = item.offsetLeft - (strip.clientWidth / 2) + (item.offsetWidth / 2);
-      strip.scrollTo({ left: left, behavior: 'smooth' });
     }
 
-    // Restore saved screen
-    if (savedIdx > 0) {
-      frame.src = SCREENS[savedIdx].file;
-      setTimeout(function () { scrollToCenter(items[savedIdx]); }, 100);
+    function updateIndicator() { }
+
+    function goTo(idx) {
+      if (idx < 0 || idx >= SCREENS.length) return;
+      curIdx = idx;
+      frame.src = SCREENS[idx].file;
+      localStorage.setItem('rwScreen', idx);
+      updateThumbActive();
+      updateIndicator();
     }
 
-    // Strip arrows
-    var SCROLL_STEP = 540;
-    document.getElementById('stripPrev').addEventListener('click', function () {
-      strip.scrollBy({ left: -SCROLL_STEP, behavior: 'smooth' });
-    });
-    document.getElementById('stripNext').addEventListener('click', function () {
-      strip.scrollBy({ left: SCROLL_STEP, behavior: 'smooth' });
-    });
-
-    // Slide arrows
-    function navigateScreen(dir) {
-      var cur = items.indexOf(activeItem);
-      var next = cur + dir;
-      if (next >= 0 && next < items.length) items[next].click();
+    function switchMode(mode) {
+      curMode = mode;
+      localStorage.setItem('rwMode', mode);
+      deviceFrame.className = 'device-frame mode-' + mode;
+      laptopBase.style.display = mode === 'pc' ? '' : 'none';
+      modeBtns.forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+      });
+      goTo(0);
+      fit();
     }
-    document.getElementById('slidePrev').addEventListener('click', function () { navigateScreen(-1); });
-    document.getElementById('slideNext').addEventListener('click', function () { navigateScreen(1); });
 
-    // Keyboard
-    document.addEventListener('keydown', function (e) {
-      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-      navigateScreen(e.key === 'ArrowLeft' ? -1 : 1);
-    });
-
-    // Scale iframe to fit
     function fit() {
-      var pad = 20;
-      var availW = window.innerWidth - pad - BEZEL_W;
-      var availH = window.innerHeight - THUMB_H - pad - BEZEL_H;
-      var scale = Math.min(availW / W, availH / H) * 0.82;
+      var m = MODES[curMode];
+      var pad = 24;
+      var availW = window.innerWidth - pad * 2 - m.BEZEL_W;
+      var availH = window.innerHeight - pad * 2 - HEADER_H - THUMB_H - m.BEZEL_H;
+      var scale = Math.min(availW / m.W, availH / m.H);
+      frame.style.width = m.W + 'px';
+      frame.style.height = m.H + 'px';
       frame.style.transform = 'scale(' + scale + ')';
-      wrap.style.width = Math.round(W * scale) + 'px';
-      wrap.style.height = Math.round(H * scale) + 'px';
+      wrap.style.width = Math.round(m.W * scale) + 'px';
+      wrap.style.height = Math.round(m.H * scale) + 'px';
     }
 
-    fit();
+    // Init
+    if (curIdx > 0) frame.src = SCREENS[curIdx].file;
+    updateThumbActive();
+    updateIndicator();
+    switchMode(curMode);
+
+    modeBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () { switchMode(btn.dataset.mode); });
+    });
+
+    document.getElementById('slidePrev').addEventListener('click', function () { goTo(curIdx - 1); });
+    document.getElementById('slideNext').addEventListener('click', function () { goTo(curIdx + 1); });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') goTo(curIdx - 1);
+      if (e.key === 'ArrowRight') goTo(curIdx + 1);
+    });
+
     window.addEventListener('resize', fit);
   </script>
+
 </body>
 
 </html>
