@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Redwoods — Demo</title>
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
   <style>
     * {
       box-sizing: border-box;
@@ -134,7 +135,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px 24px 64px;
+      padding: 20px 24px 48px;
       min-height: 0;
       position: relative;
       z-index: 2;
@@ -264,6 +265,125 @@
       border-radius: 24px;
     }
 
+    /* Gradient sits outside .device-screen, inside .device-frame */
+    .screen-bottom-fade {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 140px;
+      background: linear-gradient(to bottom, transparent 20%, rgba(17, 17, 17, 0.92) 100%);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .mode-pc .screen-bottom-fade {
+      border-radius: 0 0 20px 20px;
+    }
+
+    .mode-mobile .screen-bottom-fade {
+      border-radius: 0 0 42px 42px;
+    }
+
+    /* ── Guide popup ── */
+    .guide-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, .55);
+      backdrop-filter: blur(10px);
+    }
+
+    .guide-modal {
+      background: rgba(18, 18, 18, .95);
+      border: 1px solid rgba(255, 255, 255, .10);
+      border-radius: 20px;
+      padding: 36px 36px 28px;
+      width: 320px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, .65);
+      text-align: center;
+    }
+
+    .guide-title {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      color: rgba(255, 255, 255, .35);
+      margin-bottom: 28px;
+    }
+
+    .guide-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .guide-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .guide-keys {
+      flex-shrink: 0;
+      display: flex;
+      gap: 4px;
+      width: 72px;
+      justify-content: flex-end;
+    }
+
+    .kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 26px;
+      height: 26px;
+      padding: 0 6px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .14);
+      color: rgba(255, 255, 255, .65);
+      font-size: .68rem;
+      font-family: inherit;
+      letter-spacing: 0;
+    }
+
+    .guide-desc {
+      font-size: .72rem;
+      color: rgba(255, 255, 255, .45);
+      line-height: 1.4;
+    }
+
+    .guide-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, .06);
+      margin: 0 0 22px;
+    }
+
+    .guide-start-btn {
+      width: 100%;
+      padding: 11px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .88);
+      color: #111;
+      font-size: .73rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      cursor: pointer;
+      transition: background .15s;
+      font-family: inherit;
+    }
+
+    .guide-start-btn:hover {
+      background: #fff;
+    }
+
     .page-wrap {
       overflow: hidden;
     }
@@ -278,75 +398,65 @@
     /* ── Thumbnail nav ── */
     .thumb-nav {
       position: absolute;
-      bottom: -35px;
+      bottom: -22px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       align-items: center;
-      gap: 5px;
-      padding: 8px 10px;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, .10);
-      background: rgba(12, 12, 12, .72);
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(12, 12, 12, .75);
       backdrop-filter: blur(20px) saturate(1.5);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, .45), 0 2px 8px rgba(0, 0, 0, .28);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .40);
       white-space: nowrap;
       z-index: 20;
     }
 
-    .thumb-nav::-webkit-scrollbar {
-      height: 0;
-    }
-
     .thumb-btn {
       flex-shrink: 0;
-      min-width: 100px;
-      height: 56px;
-      border: 1px solid rgba(255, 255, 255, .10);
-      border-radius: 6px;
-      background: rgba(255, 255, 255, .06);
+      width: 6px;
+      height: 6px;
+      min-width: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .22);
+      border: none;
       cursor: pointer;
+      padding: 0;
+      transition: all .25s ease;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 3px;
-      padding: 0 12px;
-      transition: border-color .15s, background .15s, box-shadow .15s;
-      white-space: nowrap;
     }
 
     .thumb-btn:hover {
-      border-color: rgba(255, 255, 255, .22);
-      background: rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .50);
     }
 
     .thumb-btn.active {
-      border-color: rgba(255, 255, 255, .45);
-      background: rgba(255, 255, 255, .14);
-      box-shadow: 0 2px 12px rgba(0, 0, 0, .30);
+      width: auto;
+      height: 22px;
+      min-width: auto;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, .88);
+      padding: 0 10px;
     }
 
     .thumb-num {
-      font-size: .56rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      color: rgba(255, 255, 255, .22);
-    }
-
-    .thumb-btn.active .thumb-num {
-      color: var(--accent);
+      display: none;
     }
 
     .thumb-label {
-      font-size: .66rem;
+      display: none;
+      font-size: .62rem;
       letter-spacing: .04em;
-      color: rgba(255, 255, 255, .38);
+      color: #111;
+      font-weight: 600;
     }
 
     .thumb-btn.active .thumb-label {
-      color: rgba(255, 255, 255, .90);
-      font-weight: 600;
+      display: block;
     }
   </style>
 </head>
@@ -407,6 +517,7 @@
             <iframe src="static/index.html" id="pageFrame"></iframe>
           </div>
         </div>
+        <div class="screen-bottom-fade"></div>
       </div>
       <div class="laptop-base" id="laptopBase">
         <div class="laptop-base-top"></div>
@@ -416,6 +527,42 @@
     </div>
 
     <button class="slide-arrow" id="slideNext">&#8250;</button>
+  </div>
+
+  <!-- Guide popup (shown once) -->
+  <div class="guide-overlay" id="guideOverlay">
+    <div class="guide-modal">
+      <p class="guide-title">DEMO GUIDE</p>
+      <div class="guide-rows">
+        <div class="guide-row">
+          <div class="guide-keys">
+            <span class="kbd">←</span>
+            <span class="kbd">→</span>
+          </div>
+          <p class="guide-desc">키보드 화살표로 슬라이드 이동</p>
+        </div>
+        <div class="guide-row">
+          <div class="guide-keys">
+            <span class="kbd" style="font-size:.58rem;min-width:52px">ESC</span>
+          </div>
+          <p class="guide-desc">이 화면 닫기</p>
+        </div>
+        <div class="guide-row">
+          <div class="guide-keys">
+            <span class="kbd" style="font-size:.58rem;min-width:52px">●●○</span>
+          </div>
+          <p class="guide-desc">하단 네비게이션으로 직접 이동</p>
+        </div>
+        <div class="guide-row">
+          <div class="guide-keys">
+            <span class="kbd" style="font-size:.58rem;min-width:52px">MODE</span>
+          </div>
+          <p class="guide-desc">상단에서 PC / Mobile 전환</p>
+        </div>
+      </div>
+      <div class="guide-divider"></div>
+      <button class="guide-start-btn" id="guideClose">시작하기</button>
+    </div>
   </div>
 
   <script>
@@ -517,7 +664,23 @@
     document.getElementById('slidePrev').addEventListener('click', function () { goTo(curIdx - 1); });
     document.getElementById('slideNext').addEventListener('click', function () { goTo(curIdx + 1); });
 
+    // Guide popup
+    var guideOverlay = document.getElementById('guideOverlay');
+    var guideVisible = !localStorage.getItem('rwGuideShown');
+    if (guideVisible) guideOverlay.style.display = 'flex';
+
+    function closeGuide() {
+      guideVisible = false;
+      localStorage.setItem('rwGuideShown', '1');
+      guideOverlay.style.display = 'none';
+    }
+    document.getElementById('guideClose').addEventListener('click', closeGuide);
+
     document.addEventListener('keydown', function (e) {
+      if (guideVisible) {
+        if (e.key === 'Escape') closeGuide();
+        return;
+      }
       if (e.key === 'ArrowLeft') goTo(curIdx - 1);
       if (e.key === 'ArrowRight') goTo(curIdx + 1);
     });
