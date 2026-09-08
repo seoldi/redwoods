@@ -14,8 +14,10 @@ GnuBoard5 기반으로 제작한 아파트 분양 홈페이지 커스텀 테마�
 **브랜드 & 단지**
 - 브랜드 스토리 — 텍스트·이미지 애니메이션 연출
 - 단지 개요 (overview) — 사업 개요 및 주요 특징
-- 배치도 (placement) — 단지 동호수 배치 안내
+- 단지배치도 (placement) — 동 위치 및 단지 전체 배치 안내
+- 동호수배치도 (layout) — 동호수별 세대 배치 선택 안내
 - 평면도 (plane) — A~J 타입 탭 전환 + 이미지 확대
+- 시공사소개 (constructor) — 시공사 브랜드 및 주요 시공 실적
 
 **인테리어 & 시설**
 - 인테리어 — 50㎡ / 80㎡ / 84A 타입별 내부 갤러리
@@ -54,8 +56,10 @@ Covers every section required for a Korean real estate launch site — brand sto
 **Brand & Site**
 - Brand story page with animated text and image sequences
 - Site overview with project specs
-- Placement map — building and unit layout
+- Site placement map — building locations across the complex
+- Unit allocation map — per-unit selection layout by building and floor
 - Floor plans — A–J type tabs with zoomable images
+- Construction company profile — builder brand and key project portfolio
 
 **Interior & Amenities**
 - Interior gallery — per unit type (50㎡ / 80㎡ / 84A)
