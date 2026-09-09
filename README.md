@@ -1,6 +1,6 @@
 # 🏢 Redwoods — 아파트 분양 홈페이지
 
-<a href="https://seoldi.github.io/redwoods/demo.html" target="_blank">▶ 라이브 데모 (10 pages)</a> &nbsp;|&nbsp;
+<a href="https://seoldi.github.io/redwoods/demo.html" target="_blank">▶ 라이브 데모 (19 pages)</a> &nbsp;|&nbsp;
 <a href="https://xn--9m1b22au1d9pl83bx1fvpfhtqo1bg6g.kr/" target="_blank">🌐 운영 사이트</a>
 
 ---
